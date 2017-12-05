@@ -11,13 +11,15 @@ app.use(bodyParser.json());
 var DEV = process.env.DEV ? true : false;
 var stateKey = 'spotify_auth_state';
 
+// problem: no defined id or secret
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = DEV ? 'http://localhost:5000/callback' : process.env.REDIRECT_URI;
+var redirect_uri = 'http://localhost:5000/callback';
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+app.use('/example', express.static(__dirname + '/example'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -45,12 +47,16 @@ app.all('*', function(req,res,next) {
   next();
 });
 
+app.get('/', function(req, res) {
+  res.render('pages/index');
+});
+
 app.get('/login', function(req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-playback-state';
+  var scope = 'user-read-playback-state user-modify-playback-state';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',

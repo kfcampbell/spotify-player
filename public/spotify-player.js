@@ -30,6 +30,10 @@ class SpotifyPlayer {
     });
   }
 
+  toggleMusicPlayback() {
+
+  }
+
   fetchToken() {
     this.obtainingToken = true;
     return fetch(`${this.exchangeHost}/token`, {

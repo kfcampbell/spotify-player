@@ -18,7 +18,6 @@ var template = function (data) {
         <div class="progress">
           <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
         </div>
-        <button onClick="toggleMusic()" class="btn btn--login">Play/Pause</button>
       </div>
     </div>
     <div class="background" style="background-image:url(${data.item.album.images[0].url})"></div>
@@ -44,9 +43,3 @@ loginButton.addEventListener('click', () => {
 });
 
 spotifyPlayer.init();
-
-function toggleMusic() {
-  console.log("music toggled");
-  // send request to PUT https://api.spotify.com/v1/me/player/pause here
-  // must include a Authorization header with the access token
-}
