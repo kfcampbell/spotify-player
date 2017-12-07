@@ -46,8 +46,5 @@ loginButton.addEventListener('click', () => {
 spotifyPlayer.init();
 
 function toggleMusic() {
-  console.log("music toggled");
-  // send request to PUT https://api.spotify.com/v1/me/player/pause here
-  // must include a Authorization header with the access token
   spotifyPlayer.toggleMusicPlayback();
 }

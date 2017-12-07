@@ -3,6 +3,7 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
+var keys = require('./keys');
 
 var app = express();
 app.use(cookieParser());
@@ -12,8 +13,8 @@ var DEV = process.env.DEV ? true : false;
 var stateKey = 'spotify_auth_state';
 
 // problem: no defined id or secret
-var client_id = process.env.CLIENT_ID;
-var client_secret = process.env.CLIENT_SECRET;
+var client_id = keys.CLIENT_ID;
+var client_secret = keys.CLIENT_SECRET;
 var redirect_uri = 'http://localhost:5000/callback';
 
 app.set('port', (process.env.PORT || 5000));

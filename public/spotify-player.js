@@ -31,11 +31,11 @@ class SpotifyPlayer {
   }
 
   toggleMusicPlayback() {
-    console.log(this.accessToken);
     return fetch('https://api.spotify.com/v1/me/player/pause', {
-      method: 'POST',
+      method: 'PUT',
       headers: new Headers({
-        'Authorization': this.accessToken
+        'Authorization': 'Bearer ' + this.accessToken,
+        'Content-Type': 'application/json'
       })
     }).then(response => {
       console.log(response);
