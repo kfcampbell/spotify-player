@@ -46,5 +46,5 @@ loginButton.addEventListener('click', () => {
 spotifyPlayer.init();
 
 function toggleMusic() {
-  spotifyPlayer.toggleMusicPlayback();
+  spotifyPlayer.toggleMusic();
 }

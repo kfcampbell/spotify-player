@@ -30,9 +30,43 @@ class SpotifyPlayer {
     });
   }
 
-  toggleMusicPlayback() {
+  // problem: not using promises here
+  toggleMusic() {
+    var context = this.getCurrentContext();
+    if(context.is_playing) {
+      this.pauseMusic();
+    } else {
+      this.playMusic();
+    }
+  }
+
+  pauseMusic() {
     return fetch('https://api.spotify.com/v1/me/player/pause', {
       method: 'PUT',
+      headers: new Headers({
+        'Authorization': 'Bearer ' + this.accessToken,
+        'Content-Type': 'application/json'
+      })
+    }).then(response => {
+      console.log(response);
+    });
+  }
+
+  playMusic() {
+    return fetch('https://api.spotify.com/v1/me/player/play', {
+      method: 'PUT',
+      headers: new Headers({
+        'Authorization': 'Bearer ' + this.accessToken,
+        'Content-Type': 'application/json'
+      })
+    }).then(response => {
+      console.log(response);
+    });
+  }
+
+  getCurrentContext() {
+    return fetch('https://api.spotify.com/v1/me/player', {
+      method: 'GET',
       headers: new Headers({
         'Authorization': 'Bearer ' + this.accessToken,
         'Content-Type': 'application/json'
@@ -132,13 +166,13 @@ class SpotifyPlayer {
         url,
         'Spotify',
         'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' +
-          width +
-          ', height=' +
-          height +
-          ', top=' +
-          top +
-          ', left=' +
-          left
+        width +
+        ', height=' +
+        height +
+        ', top=' +
+        top +
+        ', left=' +
+        left
       );
     });
   }

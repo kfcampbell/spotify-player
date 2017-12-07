@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 var DEV = process.env.DEV ? true : false;
 var stateKey = 'spotify_auth_state';
 
-// problem: no defined id or secret
 var client_id = keys.CLIENT_ID;
 var client_secret = keys.CLIENT_SECRET;
 var redirect_uri = 'http://localhost:5000/callback';
