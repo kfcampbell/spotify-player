@@ -18,15 +18,18 @@ var template = function (data) {
         <div class="progress">
           <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
         </div>
-        <button onClick="toggleMusic()" class="btn btn--login">Play/Pause</button>
+
+        <button onClick="toggleMusic()" class="btn btn--login btn--play">&#9658;</button>
       </div>
     </div>
     <div class="background" style="background-image:url(${data.item.album.images[0].url})"></div>
   `;
 };
 
+var isPlaying = false;
 spotifyPlayer.on('update', response => {
   mainContainer.innerHTML = template(response);
+  isPlaying = response.is_playing;
 });
 
 spotifyPlayer.on('login', user => {
@@ -46,5 +49,5 @@ loginButton.addEventListener('click', () => {
 spotifyPlayer.init();
 
 function toggleMusic() {
-  spotifyPlayer.toggleMusic();
+  spotifyPlayer.toggleMusic(isPlaying);
 }

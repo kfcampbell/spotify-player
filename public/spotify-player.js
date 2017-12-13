@@ -31,9 +31,8 @@ class SpotifyPlayer {
   }
 
   // problem: not using promises here
-  toggleMusic() {
-    var context = this.getCurrentContext();
-    if(context.is_playing) {
+  toggleMusic(isPlaying) {
+    if(isPlaying){
       this.pauseMusic();
     } else {
       this.playMusic();
@@ -64,15 +63,19 @@ class SpotifyPlayer {
     });
   }
 
+  // whyyyy is this not returning the right object....
   getCurrentContext() {
     return fetch('https://api.spotify.com/v1/me/player', {
       method: 'GET',
       headers: new Headers({
         'Authorization': 'Bearer ' + this.accessToken,
-        'Content-Type': 'application/json'
+        //'Content-Type': 'application/json'
       })
     }).then(response => {
       console.log(response);
+      return response;
+    }).catch(e => {
+      console.log(e);
     });
   }
 

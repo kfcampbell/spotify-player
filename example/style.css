@@ -35,6 +35,10 @@ body {
   margin: 0 auto;
 }
 
+.btn--play {
+  margin-top: 1em;
+}
+
 /** Now Playing **/
 .now-playing__name {
   font-size: 1.5em;
